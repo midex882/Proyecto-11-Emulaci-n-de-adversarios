@@ -1,0 +1,8 @@
+name: project11-target
+title: Proyecto 11 - Controles del servidor protegido
+maintainer: alumno
+summary: Validacion de bastionado basico del servidor de la DMZ
+version: 1.0.0
+supports:
+  platform: os
+

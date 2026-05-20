@@ -1,0 +1,8 @@
+name: project11-firewall
+title: Proyecto 11 - Controles del cortafuegos
+maintainer: alumno
+summary: Validacion de reglas y evidencias del cortafuegos Docker
+version: 1.0.0
+supports:
+  platform: os
+

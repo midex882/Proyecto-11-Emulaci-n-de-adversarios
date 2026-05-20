@@ -1,0 +1,8 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"P11 TCP service discovery or unauthorized port attempt"; flags:S; flow:stateless; classtype:attempted-recon; sid:1100001; rev:1;)
+alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"P11 ICMP reconnaissance from WAN"; itype:8; threshold:type both, track by_src, count 3, seconds 30; classtype:attempted-recon; sid:1100002; rev:1;)
+alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg:"P11 SSH brute force pattern"; flags:S; flow:stateless; threshold:type both, track by_src, count 4, seconds 60; classtype:attempted-admin; sid:1100003; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET 80 (msg:"P11 HTTP path traversal attempt"; flow:to_server,established; http.uri; content:"../"; classtype:web-application-attack; sid:1100004; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET 80 (msg:"P11 Web admin probing"; flow:to_server,established; http.uri; content:"wp-login.php"; nocase; classtype:web-application-attack; sid:1100005; rev:1;)
+alert dns $EXTERNAL_NET any -> $HOME_NET 53 (msg:"P11 DNS burst or suspicious replay"; threshold:type both, track by_src, count 20, seconds 30; classtype:attempted-recon; sid:1100006; rev:1;)
+alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg:"P11 HTTP raw path traversal marker"; flow:to_server,established; content:"../"; classtype:web-application-attack; sid:1100007; rev:1;)
+alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg:"P11 HTTP encoded traversal marker"; flow:to_server,established; content:"%2e%2e"; nocase; classtype:web-application-attack; sid:1100008; rev:1;)

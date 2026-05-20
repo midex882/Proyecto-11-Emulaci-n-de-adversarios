@@ -1,0 +1,8 @@
+---
+- name: Comprobar que el contenedor protegido esta levantado
+  ansible.builtin.command: docker inspect p11-target
+  changed_when: false
+
+- name: Desactivar autenticacion por password en SSH
+  ansible.builtin.command: docker exec p11-target /usr/local/bin/harden-target.sh
+  changed_when: true

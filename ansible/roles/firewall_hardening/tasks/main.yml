@@ -1,0 +1,20 @@
+---
+- name: Comprobar que el contenedor del cortafuegos esta levantado
+  ansible.builtin.command: docker inspect p11-firewall
+  changed_when: false
+
+- name: Aplicar politica mitigada en el cortafuegos
+  ansible.builtin.command: docker exec p11-firewall /usr/local/bin/apply-firewall.sh mitigate
+  register: firewall_apply
+  changed_when: "'firewall mode: mitigate' not in firewall_apply.stdout"
+
+- name: Guardar reglas activas para auditoria
+  ansible.builtin.command: docker exec p11-firewall sh -lc 'iptables-save > /etc/project11-iptables.rules'
+  changed_when: false
+
+- name: Verificar que la politica FORWARD es DROP
+  ansible.builtin.command: docker exec p11-firewall iptables -S FORWARD
+  register: firewall_rules
+  changed_when: false
+  failed_when: "'-P FORWARD DROP' not in firewall_rules.stdout"
+

@@ -1,0 +1,10 @@
+evidence/*
+!evidence/.gitkeep
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+__pycache__/
+node_modules/
+outputs/
+

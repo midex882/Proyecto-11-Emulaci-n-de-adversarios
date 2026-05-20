@@ -1,0 +1,9 @@
+---
+- name: Bastionado de Proyecto 11 sobre laboratorio Docker
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: firewall_hardening
+    - role: target_hardening
+

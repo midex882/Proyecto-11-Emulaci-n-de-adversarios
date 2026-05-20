@@ -1,5 +1,7 @@
 # Proyecto 11: Emulacion de adversarios
 
+Informe: https://github.com/midex882/Proyecto-11-Emulaci-n-de-adversarios/blob/main/INFORME.md
+
 ## Contenedores
 
 - `p11-adversary`: equipo atacante.
